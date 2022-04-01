@@ -2,6 +2,8 @@ package org.generation.redesocial.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.generation.redesocial.model.Postagem;
 import org.generation.redesocial.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class PostagemController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Postagem> post (@RequestBody Postagem postagem){
+	public ResponseEntity<Postagem> post (@Valid @RequestBody Postagem postagem){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repo.save(postagem));
 	}
 	
