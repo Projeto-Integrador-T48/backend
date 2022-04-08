@@ -78,5 +78,22 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}	
 }
