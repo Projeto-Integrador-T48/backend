@@ -19,7 +19,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repo;
 
-	public Optional<Usuario> CadastrarUsuario(Usuario usuario) {
+	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
 		if (repo.findByUsuario(usuario.getUsuario()).isPresent()) {
 			return Optional.empty();
@@ -28,27 +28,6 @@ public class UsuarioService {
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
 		return Optional.of(repo.save(usuario));
-	}
-
-	private boolean compararSenhas(String senhaDigitada, String senhaDoBanco) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		return encoder.matches(senhaDigitada, senhaDoBanco);
-	}
-
-	private String criptografarSenha(String senha) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		return encoder.encode(senha);
-	}
-
-	private String geradorBasicToken(String usuario, String senha) {
-
-		String token = usuario + ":" + senha;
-		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
-
-		return "Basic " + new String(tokenBase64);
-
 	}
 
 	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user) {
@@ -84,6 +63,27 @@ public class UsuarioService {
 			return Optional.of(repo.save(usuario));
 		}
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario não encontrado!", null);
+
+	}
+
+	private boolean compararSenhas(String senhaDigitada, String senhaDoBanco) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		return encoder.matches(senhaDigitada, senhaDoBanco);
+	}
+
+	private String criptografarSenha(String senha) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		return encoder.encode(senha);
+	}
+
+	private String geradorBasicToken(String usuario, String senha) {
+
+		String token = usuario + ":" + senha;
+		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
+
+		return "Basic " + new String(tokenBase64);
 
 	}
 }
