@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,7 +27,8 @@ public class Usuario {
 	private String nome;
 	
 	@NotNull
-	private String email;
+	@Email
+	private String usuario;
 	
 	@NotNull
 	@Size(min = 4, max = 8)
@@ -55,11 +57,11 @@ public class Usuario {
 	}
 
 	public String getEmail() {
-		return email;
+		return usuario;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.usuario = usuario;
 	}
 
 	public String getSenha() {
