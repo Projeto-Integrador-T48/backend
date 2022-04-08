@@ -6,8 +6,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
 		<version>2.6.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
+=======
+		<version>2.6.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+>>>>>>> 0767d1581ff7684f9e2583aba882b5a52ebdb588
 	</parent>
 	<groupId>org.generation</groupId>
 	<artifactId>redesocial</artifactId>
