@@ -8,50 +8,55 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails {
-private static final long serialVersionUID = 1L;
-	
-    private String userName;
-    private String password;
-    private List<GrantedAuthority> authorities;
+	private static final long serialVersionUID = 1L;
 
-    
-    public UserDetailsImpl(Usuario Usuario) {
-    	this.userName = Usuario.getUsuario();
-    	this.userName = Usuario.getSenha();
-    }
- 
-    public UserDetailsImpl() {}
-    
-    @Override
-    public String getPassword() {
-    	return password;
-    }
-    @Override
-    public String getUsername() {
-    	return userName;
-    }
-    @Override
+	private String userName;
+	private String password;
+	private List<GrantedAuthority> authorities;
+
+	public UserDetailsImpl(Usuario usuario) {
+		
+		this.userName = usuario.getUsuario();
+		this.password = usuario.getSenha();
+	}
+
+	public UserDetailsImpl() {
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return userName;
+	}
+
+	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
 
-    //metodos padrão basic security 
-    @Override
+	// metodos padrão basic security
+	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-    @Override
+
+	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-    @Override
+
+	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-    @Override
+
+	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
-    
 }
