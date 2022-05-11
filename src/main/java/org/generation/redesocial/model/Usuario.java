@@ -34,10 +34,14 @@ public class Usuario {
 	private String usuario;
 
 	@NotNull
-	//@Size(min = 4, max = 8)
+	// @Size(min = 4, max = 8)
 	private String senha;
 
+	@Size(max = 5000)
 	private String foto;
+	
+	@NotNull
+	private String tipo;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
@@ -77,6 +81,14 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getUsuario() {
