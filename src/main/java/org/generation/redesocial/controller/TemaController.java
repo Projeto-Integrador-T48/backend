@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.generation.redesocial.model.Tema;
 import org.generation.redesocial.repository.TemaRepository;
+import org.generation.redesocial.service.TemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,9 @@ public class TemaController {
 	@Autowired
 	private TemaRepository repo;
 	
+	@Autowired
+	private TemaService service;
+	
 	@GetMapping
 	public ResponseEntity<List<Tema>> getAll(){
 		return ResponseEntity.ok(repo.findAll());
@@ -44,11 +48,13 @@ public class TemaController {
 	
 	@PostMapping
 	public ResponseEntity<Tema> post(@Valid @RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repo.save(tema));
+		return service.cadastrarTema(tema).map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(resp))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 	@PutMapping
 	public ResponseEntity<Tema> put(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.OK).body(repo.save(tema));
+		return service.atualizarTema(tema).map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(resp))
+				.orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
 	}
 	
 	@DeleteMapping("/{id}")
